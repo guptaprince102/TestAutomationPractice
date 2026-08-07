@@ -1,0 +1,36 @@
+import {test, expect} from "@playwright/test";
+import { TestConfig } from "../test.config";
+import { DataEntryForm } from "../pages/DataEntryForm";
+
+let config : TestConfig;
+let dataEntryPage : DataEntryForm
+
+test.beforeAll(async({browser})=>{
+    let context = await browser.newContext();
+    let page = await context.newPage();
+    let config = new TestConfig();
+    await page.goto(config.appUrl);
+    await page.waitForLoadState('networkidle');
+    dataEntryPage = new DataEntryForm(page);
+
+});
+test.afterAll(async({browser})=>{
+    await browser.close();
+
+});
+
+test("Verifing the user data form", async({page})=>{
+    await dataEntryPage.fillDataEntryForm();
+    
+    await expect(dataEntryPage.name).not.toBeEmpty();
+    await expect(dataEntryPage.email).not.toBeEmpty();
+    await expect(dataEntryPage.phone).not.toBeEmpty();
+    await expect(dataEntryPage.address).not.toBeEmpty();
+    
+    expect(await dataEntryPage.selectGender()).toBe(true);
+    await dataEntryPage.selectDay(4);
+    await dataEntryPage.selectCountry();
+    await page.pause();
+    
+
+})
