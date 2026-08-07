@@ -17,13 +17,13 @@ test.afterAll(async({browser})=>{
     await browser.close();
 })
 
-test("Verify if Home Page exists", async()=>  {
+test('@smoke Verify if Home Page exists', async()=>  {
 
     expect(homePage.isHomePageExist).toBeTruthy();
 
 })
 
-test("Verify if user landed on the right page", async()=>  {
+test("@smoke Verify if user landed on the right page", async()=>  {
 
     let titleDescription : string|null =  await homePage.getTitleDescription();
     expect(titleDescription).toBe("For Selenium, Cypress & Playwright");

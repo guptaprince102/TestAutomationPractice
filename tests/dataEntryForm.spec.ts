@@ -19,7 +19,7 @@ test.afterAll(async({browser})=>{
 
 });
 
-test("Verifing the user data form", async({page})=>{
+test("@functional Verifing the user data form", async({page})=>{
     await dataEntryPage.fillDataEntryForm();
     
     await expect(dataEntryPage.name).not.toBeEmpty({timeout:5000});
