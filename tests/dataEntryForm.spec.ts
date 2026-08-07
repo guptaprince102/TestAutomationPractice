@@ -10,7 +10,7 @@ test.beforeAll(async({browser})=>{
     let page = await context.newPage();
     let config = new TestConfig();
     await page.goto(config.appUrl);
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('load');
     dataEntryPage = new DataEntryForm(page);
 
 });
@@ -22,7 +22,7 @@ test.afterAll(async({browser})=>{
 test("Verifing the user data form", async({page})=>{
     await dataEntryPage.fillDataEntryForm();
     
-    await expect(dataEntryPage.name).not.toBeEmpty();
+    await expect(dataEntryPage.name).not.toBeEmpty({timeout:5000});
     await expect(dataEntryPage.email).not.toBeEmpty();
     await expect(dataEntryPage.phone).not.toBeEmpty();
     await expect(dataEntryPage.address).not.toBeEmpty();
