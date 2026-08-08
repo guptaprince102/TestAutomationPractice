@@ -28,9 +28,9 @@ test("@functional Verifing the user data form", async({page})=>{
     await expect(dataEntryPage.address).not.toBeEmpty();
     
     expect(await dataEntryPage.selectGender()).toBe(true);
-    await dataEntryPage.selectDay(4);
+    await dataEntryPage.selectDay();
     await dataEntryPage.selectCountry();
-    await page.pause();
+    await page.waitForTimeout(5000);
     
 
 })

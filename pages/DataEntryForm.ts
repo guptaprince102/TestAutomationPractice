@@ -42,9 +42,9 @@ export class DataEntryForm{
 
     }
 
-    async selectDay(numOfDays : number){
+    async selectDay(){
         let days = await this.days.allTextContents();
-        let selectDays = randomDataUtil.getRandomValues(days,numOfDays) ?? [];
+        let selectDays = randomDataUtil.getRandomValues(days) ?? [];
         for(let day of selectDays){
             await this.page.getByRole('checkbox', { name:day }).check();
         }
@@ -56,8 +56,6 @@ export class DataEntryForm{
         const availableCountries = (await this.country.locator('option').allTextContents()).map(text=>text.trim());
         
         const selectCountry = randomDataUtil.getRandomValue(availableCountries)??"";
-        console.log(availableCountries);
-        console.log(selectCountry);
         
         if(selectCountry){
             await this.country.selectOption(selectCountry);
