@@ -1,13 +1,14 @@
-import {test, expect} from "@playwright/test";
+import {test, expect, Page} from "@playwright/test";
 import { TestConfig } from "../test.config";
 import { DataEntryForm } from "../pages/DataEntryForm";
 
 let config : TestConfig;
 let dataEntryPage : DataEntryForm
+let page : Page;
 
 test.beforeAll(async({browser})=>{
     let context = await browser.newContext();
-    let page = await context.newPage();
+    page = await context.newPage();
     let config = new TestConfig();
     await page.goto(config.appUrl);
     await page.waitForLoadState('load');
@@ -19,7 +20,7 @@ test.afterAll(async({browser})=>{
 
 });
 
-test("@functional Verifing the user data form", async({page})=>{
+test("@functional Verifing the user data form", async()=>{
     await dataEntryPage.fillDataEntryForm();
     
     await expect(dataEntryPage.name).not.toBeEmpty({timeout:5000});

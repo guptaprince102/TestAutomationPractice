@@ -53,7 +53,7 @@ export class DataEntryForm{
 
     async selectCountry(){
         
-        const availableCountries = (await this.country.locator('option').allTextContents()).map(text=>text.trim());
+        const availableCountries = (await this.country.locator('option').allInnerTexts()).map(text=>text.trim());
         
         const selectCountry = randomDataUtil.getRandomValue(availableCountries)??"";
         
