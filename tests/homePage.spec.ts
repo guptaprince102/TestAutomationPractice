@@ -4,22 +4,23 @@ import { TestConfig } from "../test.config";
 
 let homePage : HomePage;
 let config : TestConfig;
+let page : Page;
 
 test.beforeAll(async({browser})=>{
     let context = await browser.newContext();
-    let page = await context.newPage();
+    page = await context.newPage();
     config = new TestConfig();
     await page.goto(config.appUrl);
     homePage = new HomePage(page);
 })
 
-test.afterAll(async({browser})=>{
-    await browser.close();
+test.afterAll(async()=>{
+    await page.close();
 })
 
 test('@smoke Verify if Home Page exists', async()=>  {
 
-    expect(homePage.isHomePageExist).toBeTruthy();
+    expect(await homePage.isHomePageExist()).toBeTruthy();
 
 })
 

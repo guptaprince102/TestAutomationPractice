@@ -15,8 +15,8 @@ test.beforeAll(async({browser})=>{
     dataEntryPage = new DataEntryForm(page);
 
 });
-test.afterAll(async({browser})=>{
-    await browser.close();
+test.afterAll(async()=>{
+    await page.close();
 
 });
 

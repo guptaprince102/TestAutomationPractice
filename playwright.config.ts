@@ -8,7 +8,8 @@ export default defineConfig({
     timeout:5000
   },
   testDir: './tests',
-  fullyParallel: false,
+  fullyParallel: true,
+  workers:4,
 
   /* Fail the build on CI if you accidentally left test.only in the source code. 
   forbidOnly: !!process.env.CI,*/
@@ -18,9 +19,9 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,*/
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['html'],
+    ['html',{open:"never"}],
     ['dot'],
-    ['list']
+    // ['list']
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -28,7 +29,7 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    headless: false,
+    headless: true,
     trace: 'on-first-retry',
     screenshot:'only-on-failure',
     video:'retain-on-failure',
