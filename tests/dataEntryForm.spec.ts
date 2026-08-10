@@ -31,7 +31,7 @@ test("@functional Verifing the user data form", async()=>{
     expect(await dataEntryPage.selectGender()).toBe(true);
     await dataEntryPage.selectDay();
     await dataEntryPage.selectCountry();
-    await page.waitForTimeout(5000);
+    
     
 
 })

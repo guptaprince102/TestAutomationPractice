@@ -18,12 +18,19 @@ export class randomDataUtil{
         return faker.location.streetAddress(true);
     }
 
-    static getRandomValue<T>(arr: T[]): T | undefined {
+   
 
-        if (arr.length === 0) {
+    static getRandomValue(arr: any[]): any | undefined {
+
+        const validValues = arr.filter(value => value != "");
+        
+        if (validValues.length === 0) {
             return undefined;
         }
-        return arr[faker.number.int({min:0, max:arr.length-1})];
+        
+        const randomValue = validValues[faker.number.int({min:0, max:arr.length-1})];
+        
+        return randomValue;
     };
 
     static getRandomValues<T>(arr: T[]): Set<T> | undefined {

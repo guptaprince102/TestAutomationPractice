@@ -3,13 +3,13 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   
-  timeout:60*1000,
+  timeout:30*1000,
   expect:{
     timeout:5000
   },
   testDir: './tests',
   fullyParallel: true,
-  workers:4,
+  workers:6,
 
   /* Fail the build on CI if you accidentally left test.only in the source code. 
   forbidOnly: !!process.env.CI,*/
