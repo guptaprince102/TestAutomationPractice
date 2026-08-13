@@ -28,7 +28,7 @@ export class randomDataUtil{
             return undefined;
         }
         
-        const randomValue = validValues[faker.number.int({min:0, max:arr.length-1})];
+        const randomValue = validValues[faker.number.int({min:0, max:validValues.length-1})];
         
         return randomValue;
     };
