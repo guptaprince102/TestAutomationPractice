@@ -6,7 +6,9 @@
   "scripts": {
     "test:all":"npx playwright test",
     "test:all:chromium":"npx playwright test --project=chromium",
+    "test:all:chromium:headed":"npx playwright test --project=chromium --headed",
     "test:all:firefox":"npx playwright test --project=firefox",
+    "test:all:firefox:headed":"npx playwright test --project=firefox --headed",
     "test:all:headed":"npx playwright test --headed",
     "test:functional" : "npx playwright test --grep @functional",
     "test:smoke" : "npx playwright test --grep @smoke",

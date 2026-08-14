@@ -19,7 +19,7 @@ test.afterEach(async()=>{
     
 })
 
-test.only("@functional Verifying by filling passenger details", async()=>{
+test("@functional Verifying by filling passenger details", async()=>{
 
     await dummyTicket.fillPassengerDetails();
     await page.waitForTimeout(5000);

@@ -4,7 +4,7 @@ import { TestConfig } from "../test.config";
 
 let datePicker : DatePickers;
 let config : TestConfig;
-let page : Page;
+export let page : Page;
 
 test.beforeEach(async({browser})=>{
     let context = await browser.newContext();
