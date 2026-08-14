@@ -17,7 +17,7 @@ test.afterEach(async()=>{
     await page.close();
 })
 
-test("Verifying the data of Dynamic Table", async()=>{
+test("@functional Verifying the data of Dynamic Table", async()=>{
     
     const chromeCPU : string = await dynamicTable.getDetails('chrome', 'cpu');
     const firefoxMemory : string = await dynamicTable.getDetails("firefox","memory");
