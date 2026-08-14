@@ -55,7 +55,6 @@ export class DyamicWebTable{
                break;
             }
         }
-        console.log('fetched Data',fetchedData);
         
         return fetchedData;
     }

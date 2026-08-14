@@ -22,6 +22,5 @@ test.afterEach(async()=>{
 test("@functional Verifying by filling passenger details", async()=>{
 
     await dummyTicket.fillPassengerDetails();
-    await page.waitForTimeout(5000);
 
 })

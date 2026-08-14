@@ -17,7 +17,7 @@ test.afterEach(async()=>{
     await page.close();
 })
 
-test.only("Verifying the data of Dynamic Table", async()=>{
+test("@functional Verifying the data of Dynamic Table", async()=>{
     
     const chromeCPU : string = await dynamicTable.getDetails('chrome', 'cpu');
     const firefoxMemory : string = await dynamicTable.getDetails("firefox","memory");
@@ -28,8 +28,5 @@ test.only("Verifying the data of Dynamic Table", async()=>{
     expect(await dynamicTable.firefoxMemory.innerText()).toEqual(firefoxMemory);
     expect(await dynamicTable.chromeNetwork.innerText()).toEqual(chromeNetwork);
     expect(await dynamicTable.firefoxDisk.innerText()).toEqual(firefoxDisk);
-    
-    
-    await page.waitForTimeout(5000);
 
 })
