@@ -2,25 +2,24 @@ import { test, Page, expect } from "@playwright/test";
 import { DummyTickets } from "../pages/DummyTickets";
 import { TestConfig } from "../test.config";
 
-let dummyTicket : DummyTickets;
+
 let config : TestConfig;
-let page : Page;
 
-test.beforeEach(async({browser})=>{
-    let context = await browser.newContext();
-    page = await context.newPage();
-    config = new TestConfig();
-    await page.goto(config.dummyTicketURL);
-    dummyTicket = new DummyTickets(page);
-})
-
-test.afterEach(async()=>{
-    await page.close();
+test.beforeEach(async()=>{
     
+    config = new TestConfig();  
 })
 
-test("@functional Verifying by filling passenger details", async()=>{
+// test.afterEach(async()=>{
+//     await page.close();
+    
+// })
 
+test("@functional Verifying by filling passenger details", async({context})=>{
+
+    let page = await context.newPage();
+    await page.goto(config.dummyTicketURL);
+    let dummyTicket = new DummyTickets(page);
     await dummyTicket.fillPassengerDetails();
 
 })
