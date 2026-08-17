@@ -19,7 +19,9 @@ export class DatePickers{
         this.dropDownDate = page.locator('#txtDate');
         this.monthLoc = page.locator(".ui-datepicker-month");
         this.yearLoc = page.locator(".ui-datepicker-year");
-        this.dateTable = page.locator(".ui-datepicker-calendar td");
+        this.dateTable = page.locator(
+            ".ui-datepicker-calendar td:not(.ui-datepicker-other-month):not(.ui-datepicker-unselectable)"
+        );
 
     }
 
@@ -42,9 +44,9 @@ export class DatePickers{
             await this.monthLoc.selectOption(selectedMonth);
         }  
 
-        const availableDates :Locator[]= await this.dateTable.all();
-        await randomDataUtil.getRandomValue(availableDates)?.click();
-
+        const availableDates: Locator[] = await this.dateTable.all();
+        const selectedDate = randomDataUtil.getRandomValue(availableDates);
+        await selectedDate?.click();
     }
 
     async fillDropDownDateByValue(){
@@ -53,9 +55,9 @@ export class DatePickers{
         await this.yearLoc.selectOption({value:"2018"});
         await this.monthLoc.click();
         await this.monthLoc.selectOption({value:"4"});
-        const availableDates :Locator[]= await this.dateTable.all();
-        await randomDataUtil.getRandomValue(availableDates)?.click();
-        
+        const availableDates: Locator[] = await this.dateTable.all();
+        const selectedDate = randomDataUtil.getRandomValue(availableDates);
+        await selectedDate?.click();
     }
     async fillDropDownDateByLabel(){
         await this.dropDownDate.click();
@@ -63,9 +65,9 @@ export class DatePickers{
         await this.yearLoc.selectOption({label:"2030"});
         await this.monthLoc.click();
         await this.monthLoc.selectOption({label:"Dec"});
-        const availableDates :Locator[]= await this.dateTable.all();
-        await randomDataUtil.getRandomValue(availableDates)?.click();
-        
+        const availableDates: Locator[] = await this.dateTable.all();
+        const selectedDate = randomDataUtil.getRandomValue(availableDates);
+        await selectedDate?.click();
     }
     async fillDropDownDateByIndex(){
         await this.dropDownDate.click();
@@ -73,8 +75,8 @@ export class DatePickers{
         await this.yearLoc.selectOption({index:10});
         await this.monthLoc.click();
         await this.monthLoc.selectOption({index:10});
-        const availableDates :Locator[]= await this.dateTable.all();
-        await randomDataUtil.getRandomValue(availableDates)?.click();
-        
+        const availableDates: Locator[] = await this.dateTable.all();
+        const selectedDate = randomDataUtil.getRandomValue(availableDates);
+        await selectedDate?.click();
     }
 }

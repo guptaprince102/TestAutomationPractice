@@ -2,30 +2,33 @@ import { test, Page, expect } from "@playwright/test";
 import { HomePage } from "../pages/HomePage";
 import { TestConfig } from "../test.config";
 
-let homePage : HomePage;
+
 let config : TestConfig;
-let page : Page;
 
-test.beforeAll(async({browser})=>{
-    let context = await browser.newContext();
-    page = await context.newPage();
+
+test.beforeEach(async()=>{
+    
     config = new TestConfig();
+})
+
+// test.afterAll(async()=>{
+//     await page.close();
+// })
+
+test('@smoke Verify if Home Page exists', async({context})=>  {
+
+    let page = await context.newPage();
     await page.goto(config.appUrl);
-    homePage = new HomePage(page);
-})
-
-test.afterAll(async()=>{
-    await page.close();
-})
-
-test('@smoke Verify if Home Page exists', async()=>  {
-
+    let homePage = new HomePage(page);
     expect(await homePage.isHomePageExist()).toBeTruthy();
 
 })
 
-test("@smoke Verify if user landed on the right page", async()=>  {
+test("@smoke Verify if user landed on the right page", async({context})=>  {
 
+    let page = await context.newPage();
+    await page.goto(config.appUrl);
+    let homePage = new HomePage(page);
     let titleDescription : string|null =  await homePage.getTitleDescription();
     expect(titleDescription).toBe("For Selenium, Cypress & Playwright");
     

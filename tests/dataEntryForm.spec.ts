@@ -4,23 +4,22 @@ import { DataEntryForm } from "../pages/DataEntryForm";
 
 let config : TestConfig;
 let dataEntryPage : DataEntryForm
-let page : Page;
+let page1:Page;
 
 test.beforeAll(async({browser})=>{
     let context = await browser.newContext();
-    page = await context.newPage();
-    let config = new TestConfig();
-    await page.goto(config.appUrl);
-    await page.waitForLoadState('load');
-    dataEntryPage = new DataEntryForm(page);
+    page1 = await context.newPage();
+    dataEntryPage = new DataEntryForm(page1);
 
 });
-test.afterAll(async()=>{
-    await page.close();
+// test.afterAll(async()=>{
+//     await page.close();
 
-});
+// });
 
 test("@functional Verifing the user data form", async()=>{
+    let config = new TestConfig();
+    await page1.goto(config.appUrl);
     await dataEntryPage.fillDataEntryForm();
     
     await expect(dataEntryPage.name).not.toBeEmpty({timeout:5000});
