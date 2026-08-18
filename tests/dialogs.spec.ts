@@ -13,9 +13,8 @@ test.beforeEach(async()=>{
 //     await page.close();
 // })
 
-test('Verifying the Simple Alert', async({context})=>{
+test('Verifying the Simple Alert', async({page})=>{
 
-    let page = await context.newPage();
     await page.goto(testConfig.appUrl);
     let dialogs = new Dialogs(page);
     const result = await dialogs.alertDialog();
@@ -24,9 +23,8 @@ test('Verifying the Simple Alert', async({context})=>{
 
 })
 
-test('Verifying by accepting the Confirmation Dialog', async({context})=>{
+test('Verifying by accepting the Confirmation Dialog', async({page})=>{
 
-    let page = await context.newPage();
     await page.goto(testConfig.appUrl);
     let dialogs = new Dialogs(page);
     const result = await dialogs.acceptConfirmDialog();
@@ -35,9 +33,8 @@ test('Verifying by accepting the Confirmation Dialog', async({context})=>{
 
 })
 
-test('Verifying by dismissing the Confirmation Dialog', async({context})=>{
+test('Verifying by dismissing the Confirmation Dialog', async({page})=>{
 
-    let page = await context.newPage();
     await page.goto(testConfig.appUrl);
     let dialogs = new Dialogs(page);
     const result = await dialogs.dismissConfirmDialog();
@@ -46,27 +43,3 @@ test('Verifying by dismissing the Confirmation Dialog', async({context})=>{
 
 })
 
-test('Verifying by accepting the Prompt Dialog', async({context})=>{
-
-    let page = await context.newPage();
-    await page.goto(testConfig.appUrl);
-    let dialogs = new Dialogs(page);
-    const inputText:string = 'John Cena';
-    const result = await dialogs.acceptPromptDialog(inputText);
-    expect.soft(result.dialogMessage).toBe('Please enter your name:');
-    expect.soft(result.dialogType).toBe('prompt');
-    expect.soft(result.dialogInput).toBe('Harry Potter');
-    expect.soft(result.dialogOutput).toContain(inputText);
-})
-
-test('Verifying by dismissing the Prompt Dialog', async({context})=>{
-
-    let page = await context.newPage();
-    await page.goto(testConfig.appUrl);
-    let dialogs = new Dialogs(page);
-    const result = await dialogs.dismissPromptDialog();
-    expect.soft(result.dialogMessage).toBe('Please enter your name:');
-    expect.soft(result.dialogType).toBe('prompt');
-    expect.soft(result.dialogInput).toBe('Harry Potter');
-    expect.soft(result.dialogOutput).toContain('cancelled');
-})

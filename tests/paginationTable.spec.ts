@@ -14,9 +14,8 @@ test.beforeEach(async()=>{
 //     await page.close();
 // })
 
-test("@functional Verifying the pagination by clicking on the checkboxes", async({context})=>{
+test("@functional Verifying the pagination by clicking on the checkboxes", async({page})=>{
 
-    let page = await context.newPage();
     await page.goto(testConfig.appUrl);
     let paginationTable = new PaginationTable(page);
     await paginationTable.checkCheckboxes();

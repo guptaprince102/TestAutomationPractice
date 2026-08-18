@@ -15,9 +15,8 @@ test.beforeEach(async()=>{
     
 // })
 
-test("@functional Verifying by filling passenger details", async({context})=>{
+test("@functional Verifying by filling passenger details", async({page})=>{
 
-    let page = await context.newPage();
     await page.goto(config.dummyTicketURL);
     let dummyTicket = new DummyTickets(page);
     await dummyTicket.fillPassengerDetails();

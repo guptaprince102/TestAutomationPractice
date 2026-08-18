@@ -15,26 +15,23 @@ test.beforeEach(async()=>{
 //     await page.close();
 // })
 
-test("@functional verifying number of rows", async({context})=>{
+test("@functional verifying number of rows", async({page})=>{
     
-    let page = await context.newPage();
     await page.goto(config.appUrl);
     let staticWebTable = new StaticWebTable(page);
     expect(await staticWebTable.getRowCount()).toBe(7);
     
 })
-test("@functional verifying number of columns", async({context})=>{
+test("@functional verifying number of columns", async({page})=>{
     
-    let page = await context.newPage();
     await page.goto(config.appUrl);
     let staticWebTable = new StaticWebTable(page);
     expect(await staticWebTable.getColumnCount()).toBe(4);
     
 })
 
-test("@functional Verifying columns details", async({context})=>{
+test("@functional Verifying columns details", async({page})=>{
 
-    let page = await context.newPage();
     await page.goto(config.appUrl);
     let staticWebTable = new StaticWebTable(page);
     expect(await staticWebTable.getColumnDetails()).toBeTruthy();

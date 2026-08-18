@@ -3,7 +3,7 @@ on:
   push:
     branches: [ mybranch ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 jobs:
   test:
     timeout-minutes: 60
@@ -22,7 +22,9 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npm run test:smoke
+      run: npm run test:smoke, 
+           npm run test:all
+      
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
