@@ -3,20 +3,20 @@ import { TestConfig } from '../test.config';
 import { Tabs } from '../pages/Tabs';
 
 let testConfig : TestConfig;
+
 test.beforeEach(async()=>{
   testConfig = new TestConfig();
 })
 
-test('verifing new tab', async ({ page }) => {
+test('@functional Verifing new tab', async ({ page }) => {
 
   let tabs = new Tabs(page);
   await page.goto(testConfig.appUrl);
   const newTabTitle = await tabs.clickTabButton();
   expect(newTabTitle).toContain('SDET');
-  
 });
 
-test('verifing Pop Ups', async ({ context }) => {
+test('@functional Verifing Pop Ups', async ({ context }) => {
 
   const page = await context.newPage()
   let tabs = new Tabs(page);
@@ -27,5 +27,4 @@ test('verifing Pop Ups', async ({ context }) => {
     await pw.close();
   }
   expect(context.pages()).toHaveLength(1);
-  
 });

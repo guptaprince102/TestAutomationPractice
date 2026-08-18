@@ -13,7 +13,7 @@ test.beforeEach(async()=>{
 //     await page.close();
 // })
 
-test('Verifying the Simple Alert', async({page})=>{
+test('@functional Verifying the Simple Alert', async({page})=>{
 
     await page.goto(testConfig.appUrl);
     let dialogs = new Dialogs(page);
@@ -23,7 +23,7 @@ test('Verifying the Simple Alert', async({page})=>{
 
 })
 
-test('Verifying by accepting the Confirmation Dialog', async({page})=>{
+test('@functional Verifying by accepting the Confirmation Dialog', async({page})=>{
 
     await page.goto(testConfig.appUrl);
     let dialogs = new Dialogs(page);
@@ -33,7 +33,7 @@ test('Verifying by accepting the Confirmation Dialog', async({page})=>{
 
 })
 
-test('Verifying by dismissing the Confirmation Dialog', async({page})=>{
+test('@functional Verifying by dismissing the Confirmation Dialog', async({page})=>{
 
     await page.goto(testConfig.appUrl);
     let dialogs = new Dialogs(page);

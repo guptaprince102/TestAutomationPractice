@@ -10,7 +10,7 @@ test.beforeEach(async()=>{
     testConfig = new TestConfig();
 })
 
-test('Verifying by accepting the Prompt Dialog', async({page})=>{
+test('@functional Verifying by accepting the Prompt Dialog', async({page})=>{
 
     await page.goto(testConfig.appUrl);
     let dialogs = new Dialogs(page);
@@ -22,7 +22,7 @@ test('Verifying by accepting the Prompt Dialog', async({page})=>{
     expect.soft(result.dialogOutput).toContain(inputText);
 })
 
-test('Verifying by dismissing the Prompt Dialog', async({page})=>{
+test('@functional Verifying by dismissing the Prompt Dialog', async({page})=>{
 
     await page.goto(testConfig.appUrl);
     let dialogs = new Dialogs(page);
