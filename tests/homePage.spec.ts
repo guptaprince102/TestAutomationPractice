@@ -15,18 +15,16 @@ test.beforeEach(async()=>{
 //     await page.close();
 // })
 
-test('@smoke Verify if Home Page exists', async({context})=>  {
+test('@smoke Verify if Home Page exists', async({page})=>  {
 
-    let page = await context.newPage();
     await page.goto(config.appUrl);
     let homePage = new HomePage(page);
     expect(await homePage.isHomePageExist()).toBeTruthy();
 
 })
 
-test("@smoke Verify if user landed on the right page", async({context})=>  {
+test("@smoke Verify if user landed on the right page", async({page})=>  {
 
-    let page = await context.newPage();
     await page.goto(config.appUrl);
     let homePage = new HomePage(page);
     let titleDescription : string|null =  await homePage.getTitleDescription();

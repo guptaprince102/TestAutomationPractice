@@ -32,7 +32,7 @@ export class Dialogs{
 
         let dialogMessage = '';
         let dialogType = '';
-        this.page.on('dialog',(dialog)=>{
+        this.page.on('dialog', dialog=>{
              dialogMessage = dialog.message();
              dialogType = dialog.type();
              dialog.accept();
@@ -45,7 +45,7 @@ export class Dialogs{
 
         let dialogMessage = '';
         let dialogType = '';
-        this.page.on('dialog',(dialog)=>{
+        this.page.on('dialog', dialog=>{
              dialogMessage = dialog.message();
              dialogType = dialog.type();
              dialog.dismiss();
@@ -59,7 +59,7 @@ export class Dialogs{
         let dialogMessage = '';
         let dialogType = '';
         let dialogInput ='';
-        this.page.on('dialog',(dialog)=>{
+        this.page.on('dialog', dialog=>{
              dialogMessage = dialog.message();
              dialogType = dialog.type();
              dialogInput = dialog.defaultValue();
@@ -75,7 +75,7 @@ export class Dialogs{
         let dialogMessage = '';
         let dialogType = '';
         let dialogInput ='';
-        this.page.on('dialog',(dialog)=>{
+        this.page.on('dialog', dialog=>{
              dialogMessage = dialog.message();
              dialogType = dialog.type();
              dialogInput = dialog.defaultValue();
