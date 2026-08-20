@@ -8,7 +8,7 @@ test.beforeEach(async()=>{
     testConfig = new TestConfig();
 })
 
-test.only('@functional Verifing the infinite scroll by getting total number of books', async({page})=>{
+test('@functional Verifing the infinite scroll by getting total number of books', async({page})=>{
 
     let infiniteScroll = new InfiniteScroll(page);
     await page.goto(testConfig.infiniteScrollingURL);

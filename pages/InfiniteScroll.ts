@@ -13,7 +13,7 @@ export class InfiniteScroll{
 
     async getBooksCount():Promise<number>{
         
-        let booksTitle =[]; 
+        let booksCount = 0; 
         let intialHeight = 0;
         while(true){
             const finalHeight = await this.page.evaluate(()=>{
@@ -24,11 +24,11 @@ export class InfiniteScroll{
             })
             await this.page.waitForTimeout(1000);
             if(intialHeight === finalHeight){
-                booksTitle = await this.booksLoc.allInnerTexts();
+                booksCount = (await this.booksLoc.allInnerTexts()).length;
                 break;
             }
             intialHeight = finalHeight;
         }
-        return booksTitle.length;
+        return booksCount;
     }
 }
