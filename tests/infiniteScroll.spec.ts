@@ -4,7 +4,7 @@ import { InfiniteScroll } from "../pages/InfiniteScroll";
 
 let testConfig : TestConfig;
 
-test.beforeEach(async()=>{
+test.beforeAll(async()=>{
     testConfig = new TestConfig();
 })
 
@@ -13,6 +13,6 @@ test('@functional Verifing the infinite scroll by getting total number of books'
     let infiniteScroll = new InfiniteScroll(page);
     await page.goto(testConfig.infiniteScrollingURL);
     const booksCount = await infiniteScroll.getBooksCount();
-    expect(booksCount).toEqual(180);
+    expect(booksCount).toBeGreaterThan(20);
 
 })

@@ -4,7 +4,7 @@ import { TestConfig } from "../test.config";
 
 let testConfig : TestConfig
 
-test.beforeEach(async()=>{
+test.beforeAll(async()=>{
     testConfig = new TestConfig();
 })
 

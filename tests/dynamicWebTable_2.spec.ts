@@ -3,7 +3,8 @@ import { TestConfig } from "../test.config";
 import { DyamicWebTable } from "../pages/DynamicWebTable";
 
 let testConfig : TestConfig;
-test.beforeEach(async()=>{
+
+test.beforeAll(async()=>{
     
     testConfig = new TestConfig();
 })

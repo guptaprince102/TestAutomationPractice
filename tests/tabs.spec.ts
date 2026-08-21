@@ -4,7 +4,7 @@ import { Tabs } from '../pages/Tabs';
 
 let testConfig : TestConfig;
 
-test.beforeEach(async()=>{
+test.beforeAll(async()=>{
   testConfig = new TestConfig();
 })
 

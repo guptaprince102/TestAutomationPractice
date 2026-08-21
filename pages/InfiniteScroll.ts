@@ -22,7 +22,7 @@ export class InfiniteScroll{
             await this.page.evaluate(()=>{
                 window.scrollTo(0, document.body.scrollHeight);
             })
-            await this.page.waitForTimeout(1000);
+            await this.page.waitForTimeout(2000);
             if(intialHeight === finalHeight){
                 booksCount = (await this.booksLoc.allInnerTexts()).length;
                 break;
