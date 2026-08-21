@@ -34,16 +34,17 @@ export class randomDataUtil{
     };
 
     static getRandomValues<T>(arr: T[]): Set<T> | undefined {
+        const validValues = arr.filter(value=>value!='');
 
-        if (arr.length === 0) {
+        if (validValues.length === 0) {
             return undefined;
         }
         const count = faker.number.int({min:2, max:arr.length-1});
         let outputSet = new Set<T>;
         for(let i=1; i<=count; i++){
             let index = faker.number.int({min:0, max:arr.length-1})
-            if(!outputSet.has(arr[index])){
-                outputSet.add(arr[index]);
+            if(!outputSet.has(validValues[index])){
+                outputSet.add(validValues[index]);
             } 
         }
         return outputSet;
