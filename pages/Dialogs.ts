@@ -1,19 +1,14 @@
 import { Page, Locator } from "@playwright/test";
+import { dialogLocators } from "../Locators/DialogsLocators";
 
 export class Dialogs{
     private readonly page : Page;
-    private readonly alertDialogLoc : Locator;
-    private readonly confirmDialogLoc : Locator;
-    private readonly promptDialogLoc : Locator;
-    private readonly promptDemo : Locator;
+    private readonly locators;
     
 
     constructor(page : Page){
         this.page = page;
-        this.alertDialogLoc = page.getByRole('button',{name:'Simple Alert'});
-        this.confirmDialogLoc = page.getByRole('button',{name:'Confirmation Alert'});
-        this.promptDialogLoc = page.getByRole('button',{name:'Prompt Alert'});
-        this.promptDemo = page.locator('#demo');
+        this.locators = dialogLocators(page);
     }
     async alertDialog():Promise<{dialogMessage:string, dialogType:string}>{
 
@@ -24,7 +19,7 @@ export class Dialogs{
              dialogType = dialog.type();
              dialog.accept();
         });
-        await this.alertDialogLoc.click();
+        await this.locators.alertDialogLoc.click();
         return {dialogMessage:dialogMessage, dialogType:dialogType};
     }
     
@@ -37,7 +32,7 @@ export class Dialogs{
              dialogType = dialog.type();
              dialog.accept();
         });
-        await this.confirmDialogLoc.click();
+        await this.locators.confirmDialogLoc.click();
         return {dialogMessage:dialogMessage, dialogType:dialogType};
     }
 
@@ -50,7 +45,7 @@ export class Dialogs{
              dialogType = dialog.type();
              dialog.dismiss();
         });
-        await this.confirmDialogLoc.click();
+        await this.locators.confirmDialogLoc.click();
         return {dialogMessage:dialogMessage, dialogType:dialogType};
     }
 
@@ -65,8 +60,8 @@ export class Dialogs{
              dialogInput = dialog.defaultValue();
              dialog.accept(inputPrompt);
         });
-        await this.promptDialogLoc.click();
-        let dialogOutput = await this.promptDemo.innerText();
+        await this.locators.promptDialogLoc.click();
+        let dialogOutput = await this.locators.promptDemo.innerText();
         return {dialogMessage:dialogMessage, dialogType:dialogType, dialogInput:dialogInput,dialogOutput:dialogOutput };
     }
 
@@ -81,8 +76,8 @@ export class Dialogs{
              dialogInput = dialog.defaultValue();
              dialog.dismiss();
         });
-        await this.promptDialogLoc.click();
-        let dialogOutput = await this.promptDemo.innerText();
+        await this.locators.promptDialogLoc.click();
+        let dialogOutput = await this.locators.promptDemo.innerText();
         return {dialogMessage:dialogMessage, dialogType:dialogType, dialogInput:dialogInput, dialogOutput:dialogOutput};
     }
 }

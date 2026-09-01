@@ -8,7 +8,7 @@ test.beforeAll(async()=>{
     testConfig = new TestConfig();
 })
 
-test('Verifing Hover Actions', async({page})=>{
+test('@functional Verifing Hover Actions', async({page})=>{
 
     let mouseAction = new MouseActions(page);
     await page.goto(testConfig.appUrl);
@@ -16,7 +16,7 @@ test('Verifing Hover Actions', async({page})=>{
 
 });
 
-test('Verifing Double Click Actions', async({page})=>{
+test('@functional Verifing Double Click Actions', async({page})=>{
 
     let mouseAction = new MouseActions(page);
     await page.goto(testConfig.appUrl);
@@ -25,10 +25,9 @@ test('Verifing Double Click Actions', async({page})=>{
     expect(output).toEqual(inputs[1]);
 });
 
-test.only('Verifing Drag and Drop Actions', async({page})=>{
+test('@functional Verifing Drag and Drop Actions', async({page})=>{
 
     let mouseAction = new MouseActions(page);
     await page.goto(testConfig.appUrl);
     await mouseAction.dragAndDropAction();
-    await page.waitForTimeout(2000);
 });

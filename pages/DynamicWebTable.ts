@@ -1,26 +1,12 @@
 import { Page, Locator } from "@playwright/test";
+import { dynamicWebTableLocators } from "../Locators/DynamicWebTableLocators";
 
 export class DyamicWebTable{
-    private readonly page : Page;
-    private readonly tableLoc : Locator;
-    private readonly tableHeadLoc : Locator;
-    private readonly tableRowLoc : Locator;
-    readonly chromeCPU : Locator;
-    readonly firefoxMemory : Locator;
-    readonly chromeNetwork : Locator;
-    readonly firefoxDisk : Locator;
+    readonly locators;
 
 
     constructor(page:Page){
-
-        this.page = page;
-        this.tableLoc = page.locator('#taskTable');
-        this.tableHeadLoc = this.tableLoc.locator('#headers');
-        this.tableRowLoc = this.tableLoc.locator('#rows');
-        this.chromeCPU = page.locator('.chrome-cpu');
-        this.firefoxMemory = page.locator('.firefox-memory');
-        this.chromeNetwork = page.locator('.chrome-network');
-        this.firefoxDisk = page.locator('.firefox-disk');
+        this.locators = dynamicWebTableLocators(page);
 
     }
 
@@ -35,8 +21,8 @@ export class DyamicWebTable{
 
             const headers = new Map<string, number>();
             
-            //storing all the headers in an array
-            const headersArr = await this.tableHeadLoc.locator('th').all();
+            //storing all the header locators in an array
+            const headersArr = await this.locators.tableHeadLoc.locator('th').all();
             let index = 0; //init index of the browser
 
             //loop through all the headers locator
@@ -63,7 +49,7 @@ export class DyamicWebTable{
         let fetchedData = '';   //init the data value
 
         //storing the rows locator in an array
-        const rows : Locator[] = await this.tableRowLoc.locator('tr').all();
+        const rows : Locator[] = await this.locators.tableRowLoc.locator('tr').all();
         
         //looping through the rows
         for(const row of rows){

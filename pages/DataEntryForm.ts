@@ -1,39 +1,27 @@
 import { Locator, Page } from "@playwright/test";
 import { randomDataUtil } from "../utils/randomDataGenerator";
+import { DataEntryLocators } from "../Locators/DataEntryFormLocators";
 
 
 export class DataEntryForm{
     private readonly page : Page;
-    readonly name : Locator;
-    readonly email : Locator;
-    readonly phone : Locator;
-    readonly address : Locator;
-    private readonly genders : Locator;
-    private readonly days : Locator;
-    private readonly country : Locator;
-
+    readonly locators;
 
     constructor(page : Page){
         this.page = page;
-        this.name = page.getByRole("textbox",{name:'Name'});
-        this.email = page.getByRole("textbox",{name:'EMail'});
-        this.phone = page.getByRole("textbox",{name:'Phone'});
-        this.address = page.getByRole('textbox',{name:'Address:'});
-        this.genders = page.locator('input[name="gender"]+label');
-        this.days = page.locator('input.form-check-input[type="checkbox"]+label');
-        this.country = page.locator('#country');
+        this.locators = DataEntryLocators(page);
     }
 
     async fillDataEntryForm(){
-        await this.name.fill(randomDataUtil.getFullName());
-        await this.email.fill(randomDataUtil.getEmail());
-        await this.phone.fill(randomDataUtil.getPhone());
-        await this.address.fill(randomDataUtil.getAddress());
+        await this.locators.name.fill(randomDataUtil.getFullName());
+        await this.locators.email.fill(randomDataUtil.getEmail());
+        await this.locators.phone.fill(randomDataUtil.getPhone());
+        await this.locators.address.fill(randomDataUtil.getAddress());
     }
 
     async selectGender():Promise<boolean>{
         
-        const genderTypes = await this.genders.allTextContents();
+        const genderTypes = await this.locators.genders.allTextContents();
         const gender = randomDataUtil.getRandomValue(genderTypes);
         const genderLocator = this.page.getByRole('radio',{name:gender, exact:true});
 
@@ -43,7 +31,7 @@ export class DataEntryForm{
     }
 
     async selectDay(){
-        let days = await this.days.allTextContents();
+        let days = await this.locators.days.allTextContents();
         let selectDays = randomDataUtil.getRandomValues(days) ?? [];
         for(let day of selectDays){
             await this.page.getByRole('checkbox', { name:day }).check();
@@ -53,12 +41,12 @@ export class DataEntryForm{
 
     async selectCountry(){
         
-        const availableCountries = (await this.country.locator('option').allInnerTexts()).map(text=>text.trim());
+        const availableCountries = (await this.locators.country.locator('option').allInnerTexts()).map(text=>text.trim());
         
         const selectCountry = randomDataUtil.getRandomValue(availableCountries)??"";
         
         if(selectCountry){
-            await this.country.selectOption(selectCountry);
+            await this.locators.country.selectOption(selectCountry);
         }
     }
 

@@ -1,14 +1,16 @@
 import { Page, Locator } from "@playwright/test";
+import { infiniteScrollLocators } from "../Locators/InfiniteScrollLocators";
 
 export class InfiniteScroll{
 
     private readonly page : Page;
-    private readonly booksLoc : Locator;
+    private readonly locators;
 
 
     constructor(page : Page){
         this.page = page;
-        this.booksLoc = page.locator('#productsDiv h3');
+        this.locators = infiniteScrollLocators(page);
+        
     }
 
     async getBooksCount():Promise<number>{
@@ -24,7 +26,7 @@ export class InfiniteScroll{
             })
             await this.page.waitForTimeout(2000);
             if(intialHeight === finalHeight){
-                booksCount = (await this.booksLoc.allInnerTexts()).length;
+                booksCount = (await this.locators.booksLoc.allInnerTexts()).length;
                 break;
             }
             intialHeight = finalHeight;

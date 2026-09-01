@@ -1,52 +1,40 @@
 import { Page, Locator } from "@playwright/test";
 import { randomDataUtil } from "../utils/randomDataGenerator";
+import {mouseActionLocators} from "../Locators/MouseActionsLocators"
 
 
 export class MouseActions{
 
     private readonly page : Page;
-    private readonly pointMe : Locator;
-    private readonly field1 : Locator;
-    private readonly field2 : Locator;
-    private readonly copyBtn : Locator;
-    private readonly dragBtn : Locator;
-    private readonly dropBtn : Locator;
+    private readonly locators;
 
 
     constructor(page : Page){
         this.page = page;
-        this.pointMe = page.getByText('Point Me', {exact : true});
-        this.field1 = page.locator('#field1');
-        this.field2 = page.locator('#field2');
-        this.copyBtn = page.getByRole('button',{name:'Copy Text'});
-        this.dragBtn = page.locator('#draggable');
-        this.dropBtn = page.locator('#droppable');
-        
+        this.locators = mouseActionLocators(page);
     }
 
     async hoverAction(){
-        await this.pointMe.hover();
+        await this.locators.pointMe.hover();
         const hoverOptions : Locator[] = await this.page.locator('.dropdown-content a').all();
-        
         const randomOption:Locator = randomDataUtil.getRandomValue(hoverOptions);
         await randomOption.hover();
-        
 
     }
 
     async doubleClickAction(input1 : string, input2 : string):Promise<string>{
 
-        await this.field1.fill(input1);
-        await this.copyBtn.dblclick();
+        await this.locators.field1.fill(input1);
+        await this.locators.copyBtn.dblclick();
         
-        await this.field1.fill(input2);
-        await this.copyBtn.click({clickCount:2});
-        const output = await this.field2.inputValue();
+        await this.locators.field1.fill(input2);
+        await this.locators.copyBtn.click({clickCount:2});
+        const output = await this.locators.field2.inputValue();
         return output;
     }
 
     async dragAndDropAction(){
 
-        await this.dragBtn.dragTo(this.dragBtn);
+        await this.locators.dragBtn.dragTo(this.locators.dropBtn);
     }
 }
