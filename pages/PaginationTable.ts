@@ -1,26 +1,25 @@
 import { Page, Locator } from "@playwright/test";
+import { paginationTableLocator } from "../Locators/PaginationTableLocators";
 
 export class PaginationTable{
-    private readonly page : Page;
-    private readonly pagination : Locator;
-    private readonly productTable : Locator;
+
+    private readonly locators;
 
     constructor(page : Page){
-        this.page = page;
-        this.pagination = page.locator('#pagination');
-        this.productTable = page.locator('#productTable tbody');
+        this.locators = paginationTableLocator(page);
+        
 
     }
     async checkCheckboxes():Promise<void> {
         //get all the pages links in an array
-        const pages : Locator[] = await this.pagination.getByRole('listitem').all();
+        const pages : Locator[] = await this.locators.pagination.getByRole('listitem').all();
         
         //loop through each page and clicking on each page link
         for(let eachPage of pages){
             await eachPage.click();
             
             //store all the rows locators in an array
-            const rows = await this.productTable.locator('tr').all();
+            const rows = await this.locators.productTable.locator('tr').all();
             
             for(const row of rows){
                 

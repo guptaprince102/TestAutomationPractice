@@ -4,12 +4,10 @@ import { StaticWebTable } from "../pages/StaticWebTable";
 
 let config : TestConfig;
 
-test.beforeEach(async()=>{
+test.beforeAll(async()=>{
     
     
     config = new TestConfig();
-    
-
 })
 // test.afterAll(async()=>{
 //     await page.close();

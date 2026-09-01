@@ -5,7 +5,7 @@ import { TestConfig } from "../test.config";
 
 let config : TestConfig = new TestConfig();
 
-test.beforeEach(async()=>{
+test.beforeAll(async()=>{
 
     config = new TestConfig();
     
@@ -16,7 +16,7 @@ test("@functional Verifying the DropDown Date Picker by Label", async({page})=>{
     let datePicker = new DatePickers(page);
     await page.goto(config.appUrl);
     await datePicker.fillDropDownDateByLabel();
-    await expect(datePicker.dropDownDate).not.toBeEmpty();
+    await expect(datePicker.locators.dropDownDate).not.toBeEmpty();
 })
 
 test("@functional Verifying the DropDown Date Picker by Index", async({page})=>{
@@ -24,5 +24,5 @@ test("@functional Verifying the DropDown Date Picker by Index", async({page})=>{
     let datePicker = new DatePickers(page);
     await page.goto(config.appUrl);
     await datePicker.fillDropDownDateByIndex();
-    await expect(datePicker.dropDownDate).not.toBeEmpty();
+    await expect(datePicker.locators.dropDownDate).not.toBeEmpty();
 })

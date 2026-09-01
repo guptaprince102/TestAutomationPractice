@@ -1,16 +1,15 @@
 import { Page, Locator, BrowserContext } from "@playwright/test";
-
+import { tabsLocators } from "../Locators/TabsLocators";
 
 export class Tabs{
 
     private readonly page : Page;
-    private readonly tabLoc : Locator;
-    private readonly popUpLoc : Locator;
+    private readonly locators;
 
     constructor(page : Page){
         this.page = page;
-        this.tabLoc = page.getByRole('button', { name: 'New Tab' });
-        this.popUpLoc = page.getByRole('button', { name: 'Popup Windows' });
+        this.locators = tabsLocators(page);
+        
     }
 
     async clickTabButton():Promise<string>{
@@ -18,7 +17,7 @@ export class Tabs{
         // await this.tabLoc.click();
         // const page1 = await page1Promise;
         const [newPage] = await Promise.all([this.page.waitForEvent('popup'), 
-                                             this.tabLoc.click()])
+                                             this.locators.tabLoc.click()])
         return await newPage.title();
 
     }
@@ -26,7 +25,7 @@ export class Tabs{
      async clickPopUpButton(){
         
         const page3Promise = this.page.waitForEvent('popup');
-        await this.popUpLoc.click();
+        await this.locators.popUpLoc.click();
         const page3 = await page3Promise;
 
     }

@@ -1,17 +1,15 @@
 import { Locator, Page } from "@playwright/test";
+import { homePageLocators } from "../Locators/HomePageLocators";
 
 export class HomePage{
 
     private readonly page: Page;
-    private readonly pwPracticeButton: Locator
-    private readonly titleDescription : Locator
+    private readonly locators;
 
     constructor(page:Page){
 
         this.page = page;
-        this.pwPracticeButton = page.getByRole("link",{name:"PlaywrightPractice"});
-        this.titleDescription = page.locator('p.description');
-
+        this.locators = homePageLocators(page);
     }
 
     async isHomePageExist():Promise<boolean>{
@@ -23,14 +21,10 @@ export class HomePage{
     }
 
     async getTitleDescription():Promise<string|null>{
-       return  await this.titleDescription.textContent()??null;
+       return  await this.locators.titleDescription.textContent()??null;
 
     }
     async goToPlawrightPractice(){
-        await this.pwPracticeButton.click();
+        await this.locators.pwPracticeButton.click();
     }
-
-
-
-
 }
