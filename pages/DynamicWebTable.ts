@@ -17,23 +17,14 @@ export class DyamicWebTable{
         const inputData = data.trim().toLowerCase();
         
         //get the Header's position in form of Map<string, number>
-        const headersOutput: Map<string, number> = await (async () => {
+        const headersOutput = new Map<string, number>();
 
-            const headers = new Map<string, number>();
-            
-            //storing all the header locators in an array
-            const headersArr = await this.locators.tableHeadLoc.locator('th').all();
-            let index = 0; //init index of the browser
+        const headers = await this.locators.tableHeadLoc.locator('th').all();
 
-            //loop through all the headers locator
-            for (const header of headersArr) {
-                //setting all the headers and index in the Map
-                headers.set(await header.innerText(), index);
-                index++; //incrementing the index
-            }
-
-            return headers;
-        })();
+        for (let index = 0; index < headers.length; index++) {
+            const headerText = (await headers[index].innerText()).trim().toLowerCase();
+            headersOutput.set(headerText, index);
+        }
 
         let dataPosition=0;     //init data position 
 
